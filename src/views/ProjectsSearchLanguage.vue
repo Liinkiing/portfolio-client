@@ -1,8 +1,8 @@
 <template>
   <div class="projects-search">
-    <ApolloQuery class="projects-container" :query="require('../graphql/queries/ProjectsSearchPlatformQuery.graphql')" :variables="{ platforms }">
+    <ApolloQuery class="projects-container" :query="require('../graphql/queries/ProjectsSearchLanguageQuery.graphql')" :variables="{ languages }">
       <template slot-scope="{ result: { data }, gqlError, isLoading }">
-        <h2>Affichage des projets tournant sur la plate-forme &laquo; {{ platform }} &raquo;</h2>
+        <h2>Affichage des projets utilisant le langage &laquo; {{ language }} &raquo;</h2>
         <ProjectsContainer v-if="data" :gql-error="gqlError" :is-loading="isLoading" :projects="data.searchProjects.edges.map(edge => edge.node)"/>
       </template>
     </ApolloQuery>
@@ -12,17 +12,17 @@
 <script>
   import Loader from "../components/ui/Loader";
   import ProjectsContainer from "../components/projects/ProjectsContainer";
-  import {PLATFORM_NAMES_MAP} from "../utils/variables";
+  import {LANGUAGE_NAMES_MAP} from "../utils/variables";
 
   export default {
     name: 'ProjectsSearchLanguage',
     components: {ProjectsContainer, Loader},
     props: {
-      platforms: {type: Array, required: true}
+      languages: {type: Array, required: true}
     },
     computed: {
-      platform() {
-        return PLATFORM_NAMES_MAP[this.platforms.join('')]
+      language() {
+        return LANGUAGE_NAMES_MAP[this.languages.join('')]
       }
     }
   }

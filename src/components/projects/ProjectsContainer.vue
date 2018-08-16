@@ -41,33 +41,18 @@
       isLoading: {required: false},
     },
     methods: {
-      initStyles(el) {
+      beforeEnter(el) {
         el.style.opacity = 0
         el.style.transform = FROM_CARD_TRANSFORM
         el.style.transformOrigin = 'top center'
       },
-      clearStyles(el) {
-        el.style.transform = null
-        el.style.transformOrigin = null
-        el.style.opacity = null
-        el.style.transition = `all ${TRANSITION_DURATION}s`
-      },
-      beforeEnter(el) {
-        this.initStyles(el)
-      },
       enter(el, done) {
         const delay = ms(el.dataset.index * 150)
-        appear(el, () => {
-          this.clearStyles(el);
-          done();
-        }, delay);
+        appear(el, done, delay);
       },
       leave(el, done) {
         const delay = ms(el.dataset.index * 150)
-        disappear(el, () => {
-          this.initStyles(el);
-          done();
-        }, delay);
+        disappear(el, done, delay);
       }
     }
   }

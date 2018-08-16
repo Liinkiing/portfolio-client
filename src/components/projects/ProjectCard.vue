@@ -47,6 +47,8 @@
 
 <style lang="scss" scoped>
   .project-card {
+    transition: top $transition-duration;
+    top: 0;
     display: flex;
     text-decoration: none;
     flex-direction: column;
@@ -123,7 +125,7 @@
     &:hover {
       box-shadow: $darker-shadow-position;
       cursor: pointer;
-      transform: translateY(-8px) scale(1.02);
+      top: -12px;
       & > img {
         filter: blur(3px);
         transform: scale(1.05);
