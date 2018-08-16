@@ -5,15 +5,18 @@ fragment ProjectsContainer_project on Project {
   thumbnailUrl
   categories {
     id
+    slug
     name
   }
   platforms {
     id
+    slug
     name
     iconUrl
   }
   languages {
     id
+    slug
     name
     iconUrl
   }

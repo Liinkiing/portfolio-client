@@ -1,14 +1,11 @@
 <template>
-  <ApolloQuery class="projects-container" :query="require('../../graphql/queries/ProjectsContainerQuery.graphql')">
-    <template slot-scope="{ result: { data }, gqlError, isLoading }">
-      <h2>Projets</h2>
       <div class="row center-xs">
         <transition name="fade-up" mode="out-in" appear>
           <Loader key="loader" v-if="isLoading" with-background fixed inline/>
-          <transition-group v-else-if="data" tag="div" class="projects" appear
+          <transition-group v-else-if="projects" tag="div" class="projects" name="flip-list" appear
                             @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <ProjectCard
-              v-for="(project, index) in data.projects.edges.map(edge => edge.node)"
+              v-for="(project, index) in projects"
               :key="project.id"
               :data-index="index"
               :project="project"
@@ -17,8 +14,6 @@
           <div key="error" v-else-if="gqlError">{{ gqlError.message }}</div>
         </transition>
       </div>
-    </template>
-  </ApolloQuery>
 </template>
 
 <style lang="scss" scoped>
@@ -40,6 +35,11 @@
 
   export default {
     components: {Loader, ProjectCard},
+    props: {
+      projects: {type: Array, required: true},
+      gqlError: {required: false},
+      isLoading: {required: false},
+    },
     methods: {
       initStyles(el) {
         el.style.opacity = 0

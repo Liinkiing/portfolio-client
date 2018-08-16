@@ -4,10 +4,10 @@
     <h3>{{ project.title }}</h3>
     <div class="content">
       <span class="icon-list platforms">
-        <img class="icon" v-for="platform in project.platforms" :src="platform.iconUrl" :alt="platform.name" :key="platform.id">
+        <ProjectCardPlatform class="icon-list-item" v-for="platform in project.platforms" :platform="platform" :key="platform.id"/>
       </span>
       <span class="icon-list reverse languages">
-        <img class="icon" v-for="language in project.languages" :src="language.iconUrl" :alt="language.name" :key="language.id">
+        <ProjectCardLanguage class="icon-list-item" v-for="language in project.languages" :language="language" :key="language.id"/>
       </span>
     </div>
   </router-link>
@@ -17,9 +17,12 @@
   import * as Vibrant from 'node-vibrant'
   import {extractColor} from "../../utils/colors";
   import {CORS_ANYWHERE} from "../../utils/variables";
+  import ProjectCardLanguage from "./ProjectCardLanguage";
+  import ProjectCardPlatform from "./ProjectCardPlatform";
 
   export default {
     name: 'ProjectCard',
+    components: {ProjectCardPlatform, ProjectCardLanguage},
     props: {
       project: {type: Object, required: true}
     },
@@ -66,18 +69,8 @@
         display: flex;
         left: 1rem;
         bottom: 1rem;
-        & .icon {
-          transition: all $transition-duration;
-          width: 14px;
-          height: 14px;
-          display: inline-flex;
-          position: relative;
-          z-index: 2;
-          margin-right: 1rem;
-          opacity: 0.5;
-          &:hover {
-            opacity: 0.9;
-          }
+        & .icon-list-item {
+          margin-right: 0.5rem;
           &:last-of-type {
             margin-right: 0;
           }
@@ -86,9 +79,9 @@
           left: auto;
           right: 1rem;
           flex-direction: row-reverse;
-          & .icon {
+          & .icon-list-item {
             margin-right: auto;
-            margin-left: 1rem;
+            margin-left: 0.5rem;
             &:last-of-type {
               margin-left: 0;
             }

@@ -21,6 +21,10 @@
   transition: opacity .3s, filter 0.4s, transform 0.3s;
 }
 
+.flip-list-move {
+  transition: transform .3s;
+}
+
 .zoom-enter, .zoom-leave-to {
   opacity: 0;
   filter: blur(10px);

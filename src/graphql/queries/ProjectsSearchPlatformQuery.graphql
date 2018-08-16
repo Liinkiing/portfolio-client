@@ -1,0 +1,12 @@
+#import '../fragments/ProjectsContainer_project.graphql'
+
+query ProjectsSearchPlatformQuery($platforms: [String!]) {
+  searchProjects(platforms: $platforms) {
+    totalCount
+    edges {
+      node {
+        ...ProjectsContainer_project
+      }
+    }
+  }
+}

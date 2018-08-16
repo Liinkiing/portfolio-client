@@ -7,15 +7,18 @@ fragment ProjectView_project on Project {
   createdAt
   categories {
     id
+    slug
     name
   }
   platforms {
     id
+    slug
     name
     iconUrl
   }
   languages {
     id
+    slug
     name
     iconUrl
   }
