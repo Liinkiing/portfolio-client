@@ -1,5 +1,5 @@
 <template>
-  <div class="project-card" :style="style">
+  <router-link :to="{name: 'project.view', params: { slug: project.slug } }" class="project-card" :style="style">
     <img :src="project.thumbnailUrl" :alt="project.title">
     <h3>{{ project.title }}</h3>
     <div class="content">
@@ -10,7 +10,7 @@
         <img class="icon" v-for="language in project.languages" :src="language.iconUrl" :alt="language.name" :key="language.id">
       </span>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -44,8 +44,8 @@
 
 <style lang="scss" scoped>
   .project-card {
-    transition: all $transition-duration;
     display: flex;
+    text-decoration: none;
     flex-direction: column;
     position: relative;
     width: 300px;
@@ -130,7 +130,7 @@
     &:hover {
       box-shadow: $darker-shadow-position;
       cursor: pointer;
-      transform: translateY(-2px) scale(1.02);
+      transform: translateY(-8px) scale(1.02);
       & > img {
         filter: blur(3px);
         transform: scale(1.05);

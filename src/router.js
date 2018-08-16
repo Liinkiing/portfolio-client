@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import HomeView from './views/HomeView.vue'
+import ProjectView from './views/ProjectView.vue'
+import NotFoundView from './views/NotFoundView.vue'
 
 Vue.use(Router)
 
@@ -10,7 +12,18 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: HomeView
     },
+    {
+      path: '/project/:slug',
+      name: 'project.view',
+      component: ProjectView,
+      props: true
+    },
+    {
+      path: '*',
+      name: 'not_found',
+      component: NotFoundView
+    }
   ]
 })

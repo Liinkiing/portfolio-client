@@ -1,17 +1,24 @@
-import Velocity from 'velocity-animate'
+import {TweenLite} from 'gsap'
+import {FROM_CARD_TRANSFORM, TO_CARD_TRANSFORM} from "./variables";
 
-export const appear = ($el, done) => {
-  Velocity(
-    $el,
-    { opacity: 1 },
-    { complete: done }
-  )
+
+
+export const appear = ($el, done, delay = 0, duration = 0.3) => {
+  return TweenLite
+    .to($el, duration, {
+      opacity: 1,
+      transform: TO_CARD_TRANSFORM
+    })
+    .delay(delay)
+    .eventCallback('onComplete', done)
 }
 
-export const disappear = ($el, done) => {
-  Velocity(
-    $el,
-    { opacity: 0 },
-    { complete: done }
-  )
+export const disappear = ($el, done, delay = 0, duration = 0.3) => {
+  return TweenLite
+    .to($el, duration, {
+      opacity: 0,
+      transform: FROM_CARD_TRANSFORM
+    })
+    .delay(delay)
+    .eventCallback('onComplete', done)
 }

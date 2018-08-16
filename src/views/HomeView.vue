@@ -7,7 +7,7 @@
 <script>
   import ProjectsContainer from "../components/projects/ProjectsContainer";
   export default {
-    name: 'home',
+    name: 'Home',
     components: {ProjectsContainer},
   }
 </script>

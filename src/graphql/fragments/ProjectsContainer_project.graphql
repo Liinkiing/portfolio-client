@@ -1,6 +1,7 @@
 fragment ProjectsContainer_project on Project {
   id
   title
+  slug
   thumbnailUrl
   categories {
     id

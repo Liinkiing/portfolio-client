@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view class="container"/>
+    <transition name="zoom" mode="out-in">
+      <router-view class="container"/>
+    </transition>
   </div>
 </template>
 

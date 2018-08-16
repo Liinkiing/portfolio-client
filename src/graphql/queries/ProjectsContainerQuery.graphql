@@ -1,6 +1,6 @@
 #import '../fragments/ProjectsContainer_project.graphql'
 
-{
+query ProjectsContainerQuery {
   projects {
     edges {
       node {
