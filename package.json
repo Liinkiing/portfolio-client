@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "flexboxgrid-sass": "^8.0.5",
+    "hamburgers": "^0.9.3",
     "vue": "^2.5.17",
     "vue-apollo": "^3.0.0-beta.10",
     "vue-router": "^3.0.1",

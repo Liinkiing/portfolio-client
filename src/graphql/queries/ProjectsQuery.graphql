@@ -1,0 +1,10 @@
+{
+  projects {
+    edges {
+      node {
+        id
+        title
+      }
+    }
+  }
+}
