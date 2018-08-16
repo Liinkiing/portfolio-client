@@ -7,7 +7,7 @@
             <p>{{ data.project.description }}</p>
             <div class="project-body" v-html="data.project.body">{{ data.project.body }}</div>
           </div>
-          <div key="error" v-else-if="gqlError">{{ gqlError.message }}</div>
+          <h2 key="error" v-else-if="gqlError">{{ gqlError.message }}</h2>
         </transition>
       </template>
     </ApolloQuery>

@@ -1,6 +1,6 @@
 <template>
   <div class="project">
-    <h1>Détail d'un projet</h1>
+    <h1>Page non trouvée</h1>
   </div>
 </template>
 

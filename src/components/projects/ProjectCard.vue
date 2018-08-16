@@ -48,6 +48,7 @@
 <style lang="scss" scoped>
   .project-card {
     transition: top $transition-duration;
+    backface-visibility: hidden;
     top: 0;
     display: flex;
     text-decoration: none;
