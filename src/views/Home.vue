@@ -1,13 +1,15 @@
 <template>
   <div class="home">
-
+    <ProjectsContainer/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'home',
-}
+  import ProjectsContainer from "../components/projects/ProjectsContainer";
+  export default {
+    name: 'home',
+    components: {ProjectsContainer},
+  }
 </script>
 
 <style lang="scss" scoped>

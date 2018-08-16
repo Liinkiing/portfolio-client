@@ -1,0 +1,11 @@
+#import '../fragments/ProjectsContainer_project.graphql'
+
+{
+  projects {
+    edges {
+      node {
+        ...ProjectsContainer_project
+      }
+    }
+  }
+}

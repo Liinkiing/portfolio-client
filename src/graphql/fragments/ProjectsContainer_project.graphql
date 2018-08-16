@@ -1,0 +1,11 @@
+fragment ProjectsContainer_project on Project {
+  id
+  title
+  thumbnailUrl
+  categories {
+    name
+  }
+  platforms {
+    name
+  }
+}
