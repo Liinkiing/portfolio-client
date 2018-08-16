@@ -1,0 +1,7 @@
+#import '../fragments/ProjectView_project.graphql'
+
+query ProjectViewQuery($slug: String!) {
+  project(slug: $slug) {
+    ...ProjectView_project
+  }
+}

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "loader",
+  name: "Loader",
   props: {
     inline: { type: Boolean, required: false, default: false },
     withBackground: { type: Boolean, required: false, default: false },

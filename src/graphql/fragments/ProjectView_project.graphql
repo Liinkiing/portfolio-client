@@ -1,0 +1,22 @@
+fragment ProjectView_project on Project {
+  id
+  title
+  description
+  body
+  thumbnailUrl
+  createdAt
+  categories {
+    id
+    name
+  }
+  platforms {
+    id
+    name
+    iconUrl
+  }
+  languages {
+    id
+    name
+    iconUrl
+  }
+}

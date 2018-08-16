@@ -16,7 +16,7 @@
 <script>
   import * as Vibrant from 'node-vibrant'
   import {extractColor} from "../../utils/colors";
-  import {corsAnywhere} from "../../main";
+  import {CORS_ANYWHERE} from "../../utils/variables";
 
   export default {
     name: 'ProjectCard',
@@ -29,7 +29,7 @@
       }
     },
     async created() {
-      const palette = await Vibrant.from(`${corsAnywhere}${this.project.thumbnailUrl}`).getPalette()
+      const palette = await Vibrant.from(`${CORS_ANYWHERE}${this.project.thumbnailUrl}`).getPalette()
       this.proeminentColor = extractColor(palette)
     },
     computed: {

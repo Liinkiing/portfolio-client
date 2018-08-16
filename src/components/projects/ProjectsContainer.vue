@@ -4,7 +4,7 @@
       <h2>Projets</h2>
       <div class="row center-xs">
         <transition name="fade-up" mode="out-in" appear>
-          <Loader key="loader" v-if="isLoading" with-background inline/>
+          <Loader key="loader" v-if="isLoading" with-background fixed inline/>
           <transition-group v-else-if="data" tag="div" class="projects" appear
                             @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <ProjectCard

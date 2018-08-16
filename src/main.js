@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 import { createProvider } from './vue-apollo'
 
-export const corsAnywhere = `https://cors-anywhere.herokuapp.com/`;
+export const EventBus = new Vue()
 
 Vue.config.productionTip = false
 
