@@ -3,8 +3,11 @@
     <img :src="project.thumbnailUrl" :alt="project.title">
     <h3>{{ project.title }}</h3>
     <div class="content">
-      <span class="platforms">
-        {{ project.platforms.map(platform => platform.name).join(', ') }}
+      <span class="icon-list platforms">
+        <img class="icon" v-for="platform in project.platforms" :src="platform.iconUrl" :alt="platform.name" :key="platform.id">
+      </span>
+      <span class="icon-list reverse languages">
+        <img class="icon" v-for="language in project.languages" :src="language.iconUrl" :alt="language.name" :key="language.id">
       </span>
     </div>
   </div>
@@ -28,7 +31,6 @@
     async created() {
       const palette = await Vibrant.from(`${corsAnywhere}${this.project.thumbnailUrl}`).getPalette()
       this.proeminentColor = extractColor(palette)
-      console.log(this.project.platforms)
     },
     computed: {
       style() {
@@ -59,10 +61,39 @@
       background: $white;
       flex: 1;
       top: 100%;
-      & .platforms {
+      & .icon-list {
         position: absolute;
+        display: flex;
         left: 1rem;
         bottom: 1rem;
+        & .icon {
+          transition: all $transition-duration;
+          width: 14px;
+          height: 14px;
+          display: inline-flex;
+          position: relative;
+          z-index: 2;
+          margin-right: 1rem;
+          opacity: 0.5;
+          &:hover {
+            opacity: 0.9;
+          }
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+        &.reverse {
+          left: auto;
+          right: 1rem;
+          flex-direction: row-reverse;
+          & .icon {
+            margin-right: auto;
+            margin-left: 1rem;
+            &:last-of-type {
+              margin-left: 0;
+            }
+          }
+        }
       }
     }
     & h3 {
@@ -75,7 +106,7 @@
       border-radius: 3px;
 
     }
-    & img {
+    & > img {
       transition: all $transition-duration;
       position: absolute;
       z-index: -2;
@@ -100,7 +131,7 @@
       box-shadow: $darker-shadow-position;
       cursor: pointer;
       transform: translateY(-2px) scale(1.02);
-      & img {
+      & > img {
         filter: blur(3px);
         transform: scale(1.05);
         top: -50px;

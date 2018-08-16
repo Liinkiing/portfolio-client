@@ -3,9 +3,17 @@ fragment ProjectsContainer_project on Project {
   title
   thumbnailUrl
   categories {
+    id
     name
   }
   platforms {
+    id
     name
+    iconUrl
+  }
+  languages {
+    id
+    name
+    iconUrl
   }
 }
