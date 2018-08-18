@@ -1,6 +1,6 @@
 <template>
   <div class="grid-view">
-    <ApolloQuery :query="require('../graphql/queries/SearchProjectsViewQuery.graphql.graphql')"
+    <ApolloQuery :query="require('../graphql/queries/SearchProjectsViewQuery.graphql')"
                  :variables="{ languages, platforms, operator }">
       <template slot-scope="{ result: { data }, gqlError, isLoading }">
         <ProjectsFilters :operator="operator" :languages="languages" :platforms="platforms"/>
