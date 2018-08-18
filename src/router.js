@@ -2,9 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HomeView from './views/HomeView.vue'
 import ProjectView from './views/ProjectView.vue'
-import ProjectsSearchPlatform from './views/ProjectsSearchPlatform.vue'
-import ProjectsSearchLanguage from './views/ProjectsSearchLanguage.vue'
+import SearchProjectsView from './views/SearchProjectsView.vue'
 import NotFoundView from './views/NotFoundView.vue'
+
+const AND_OPERATOR = 'AND'
+const OR_OPERATOR = 'OR'
+
+const CONDITION_REGEXP = new RegExp(`(${AND_OPERATOR}|${OR_OPERATOR})`, 'i');
 
 Vue.use(Router)
 
@@ -17,16 +21,20 @@ export default new Router({
       component: HomeView
     },
     {
-      path: '/projects/language/:language',
-      name: 'projects.language',
-      component: ProjectsSearchLanguage,
-      props: route => ({languages: [route.params.language]})
-    },
-    {
-      path: '/projects/platform/:platform',
-      name: 'projects.platform',
-      component: ProjectsSearchPlatform,
-      props: route => ({platforms: [route.params.platform]})
+      path: '/search/projects',
+      name: 'search.projects',
+      component: SearchProjectsView,
+      props: route => {
+        let operator = AND_OPERATOR;
+        if (route.query.operator && route.query.operator.match(CONDITION_REGEXP)) {
+          operator = route.query.operator.match(CONDITION_REGEXP)[0].toUpperCase()
+        }
+        return {
+          platforms: !route.query.platforms ? [] : route.query.platforms.split(',').filter(Boolean).sort(),
+          operator,
+          languages: !route.query.languages ? [] : route.query.languages.split(',').filter(Boolean).sort(),
+        }
+      }
     },
     {
       path: '/project/:slug',

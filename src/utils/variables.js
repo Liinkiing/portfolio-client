@@ -3,6 +3,8 @@ export const CORS_ANYWHERE = `https://cors-anywhere.herokuapp.com/`;
 export const FROM_CARD_TRANSFORM = 'translateY(-10px) scale(0.8)'
 export const TO_CARD_TRANSFORM = 'translateY(0) scale(1)'
 
+export const DEFAULT_OPERATOR = "AND"
+
 export const PLATFORM_NAMES_MAP = {
   windows: 'Windows',
   macos: 'MacOS',

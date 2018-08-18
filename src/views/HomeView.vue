@@ -3,7 +3,9 @@
     <ApolloQuery class="projects-container" :query="require('../graphql/queries/ProjectsContainerQuery.graphql')">
       <template slot-scope="{ result: { data }, gqlError, isLoading }">
         <h2>Projets</h2>
-        <ProjectsContainer v-if="data" :gql-error="gqlError" :is-loading="isLoading" :projects="data.projects.edges.map(edge => edge.node)"/>
+        <ProjectsContainer v-if="data"
+                           :projects="data.projects.edges.map(edge => edge.node)"
+                           delayed-appear/>
       </template>
     </ApolloQuery>
   </div>

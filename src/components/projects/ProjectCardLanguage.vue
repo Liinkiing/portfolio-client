@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'projects.language', params: { language: language.slug }}" class="project-card-language">
+  <router-link :replace="$router.currentRoute.name === 'search.projects'" :to="{name: 'search.projects', query: { languages: language.slug }}" class="project-card-language">
     <img class="icon" :src="language.iconUrl" :alt="language.name" >
   </router-link>
 </template>

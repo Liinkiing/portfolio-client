@@ -3,7 +3,7 @@ import {FROM_CARD_TRANSFORM, TO_CARD_TRANSFORM} from "./variables";
 
 
 
-export const appear = ($el, done, delay = 0, duration = 0.3) => {
+export const appear = ($el, done, delay = 0, duration = 0.1) => {
   return TweenLite
     .to($el, duration, {
       opacity: 1,
@@ -13,7 +13,7 @@ export const appear = ($el, done, delay = 0, duration = 0.3) => {
     .eventCallback('onComplete', done)
 }
 
-export const disappear = ($el, done, delay = 0, duration = 0.3) => {
+export const disappear = ($el, done, delay = 0, duration = 0.1) => {
   return TweenLite
     .to($el, duration, {
       opacity: 0,

@@ -1,0 +1,12 @@
+#import '../fragments/ProjectsContainer_project.graphql'
+
+query SearchProjectsQuery($languages: [String!], $platforms: [String!], $operator: ConditionOperator) {
+  searchProjects(languages: $languages, platforms: $platforms, operator: $operator) {
+    totalCount
+    edges {
+      node {
+        ...ProjectsContainer_project
+      }
+    }
+  }
+}

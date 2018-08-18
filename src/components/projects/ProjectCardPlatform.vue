@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'projects.platform', params: { platform: platform.slug } }" class="project-card-platform">
+  <router-link :replace="$router.currentRoute.name === 'search.projects'" :to="{name: 'search.projects', query: { platforms: platform.slug } }" class="project-card-platform">
     <img class="icon" :src="platform.iconUrl" :alt="platform.name" :key="platform.id">
   </router-link>
 </template>

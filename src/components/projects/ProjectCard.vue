@@ -50,7 +50,7 @@
     transition: top $transition-duration;
     backface-visibility: hidden;
     top: 0;
-    display: flex;
+    display: inline-flex;
     text-decoration: none;
     flex-direction: column;
     position: relative;
