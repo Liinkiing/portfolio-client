@@ -1,60 +1,32 @@
 <template>
-    <div class="projects-filters">
-      <router-link :to="{name: 'home'}">Retour</router-link>
-      <router-link :to="{}">Reset</router-link>
-      <label>
-        HTML
-        <input type="checkbox" v-model="filters.languages.html">
-      </label>
-      <label>
-        JavaScript
-        <input type="checkbox" v-model="filters.languages.javascript">
-      </label>
-      <label>
-        CSS
-        <input type="checkbox" v-model="filters.languages.css">
-      </label>
-      <label>
-        PHP
-        <input type="checkbox" v-model="filters.languages.php">
-      </label>
-      <label>
-        C#
-        <input type="checkbox" v-model="filters.languages.csharp">
-      </label>
-      <label>
-        Android
-        <input type="checkbox" v-model="filters.platforms.android">
-      </label>
-      <label>
-        MacOS
-        <input type="checkbox" v-model="filters.platforms.macos">
-      </label>
-      <label>
-        Linux
-        <input type="checkbox" v-model="filters.platforms.linux">
-      </label>
-      <label>
-        Windows
-        <input type="checkbox" v-model="filters.platforms.windows">
-      </label>
-      <label>
-        Web
-        <input type="checkbox" v-model="filters.platforms.web">
-      </label>
-      <label>
-        ET
-        <input type="radio" name="operator" value="and" v-model="filters.operator">
-      </label>
-      <label>
-        OU
-        <input type="radio" name="operator" value="or" v-model="filters.operator">
-      </label>
+  <div class="projects-filters">
+    <div class="filters">
+      <router-link class="back" :to="{name: 'home'}">X</router-link>
+      <div class="filters-category filters-platform">
+        <div class="filter" v-for="platformCode in Object.keys(filters.platforms)"
+             :key="platformCode" :class="{'active': filters.platforms[platformCode]}">
+          <label>
+            {{ platformName(platformCode) }}
+            <input type="checkbox" v-model="filters.platforms[platformCode]">
+          </label>
+        </div>
+      </div>
+      <router-link :to="{}" class="filter-clear" :class="{'hidden': !hasFilters}">Clear</router-link>
+      <div class="filters-category filters-language">
+        <div class="filter" v-for="languageCode in Object.keys(filters.languages)"
+             :key="languageCode" :class="{'active': filters.languages[languageCode]}">
+          <label>
+            {{ languageName(languageCode) }}
+            <input type="checkbox" v-model="filters.languages[languageCode]">
+          </label>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-  import {DEFAULT_OPERATOR} from "../../utils/variables";
+  import {DEFAULT_OPERATOR, LANGUAGE_NAMES_MAP, PLATFORM_NAMES_MAP} from "../../utils/variables";
 
   export default {
     name: "ProjectsFilters",
@@ -77,10 +49,19 @@
           platforms: {
             android: false,
             linux: false,
+            windows: false,
             web: false,
             macos: false
           }
         }
+      }
+    },
+    computed: {
+      hasFilters () {
+        return [
+          ...Object.entries(this.filters.languages).map(e => e[1]),
+          ...Object.entries(this.filters.platforms).map(e => e[1])
+        ].some(filter => filter === true)
       }
     },
     watch: {
@@ -99,12 +80,18 @@
               .join(',')
             if (query[key] === "") delete query[key]
           })
-          this.$router.replace({query: { ...query, operator } })
+          this.$router.replace({query: {...query, operator}})
         },
         deep: true
       }
     },
     methods: {
+      languageName(languageCode) {
+        return LANGUAGE_NAMES_MAP[languageCode]
+      },
+      platformName(platformCode) {
+        return PLATFORM_NAMES_MAP[platformCode]
+      },
       updateFilters() {
         Object.keys(this.filters.languages).forEach(key => {
           this.filters.languages[key] = false
@@ -121,12 +108,67 @@
         this.filters.operator = this.operator.toLowerCase()
       }
     },
-    mounted () {
+    mounted() {
       this.updateFilters()
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
+  .projects-filters {
+    max-width: 90%;
+    margin: 0 auto;
+    & .back {
+      align-self: center;
+      margin-right: 20px;
+      text-decoration: none;
+    }
+    & .filters {
+      display: flex;
+      & .filters-category {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      & .filter-clear {
+        transition: opacity 0.3s;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        padding: 0.7rem;
+        text-decoration: none;
+        flex: 1;
+        margin: 0 20px;
+        &.hidden {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      & .filter {
+        transition: all 0.1s;
+        display: inline-flex;
+        margin: 0.2rem;
+        & label {
+          transition: inherit;
+          background: $green;
+          padding: 0.25rem 0.5rem;
+          border-radius: $main-border-radius;
+          color: $white;
+          &:hover {
+            cursor: pointer;
+            background: darken($green, 6%);
+          }
+        }
+        &.active label {
+          background: darken($green, 8%);
+        }
+        & input[type="checkbox"] {
+          position: absolute;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+  }
 </style>
