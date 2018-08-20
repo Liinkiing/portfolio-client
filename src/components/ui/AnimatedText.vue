@@ -5,7 +5,7 @@
                       @before-enter="beforeEnter"
                       @enter="enter"
                       @leave="leave">
-      <span class="letter" v-for="(letter, index) in letters" :key="index" :data-index="index">{{ letter }}</span>
+      <span class="letter" v-for="(letter, index) in letters" :key="index" :data-index="index" v-html="letter">{{ letter }}</span>
     </transition-group>
   </component>
 </template>
@@ -46,7 +46,7 @@
       }
     },
     created() {
-      this.letters = this.$slots.default[0].text.split('')
+      this.letters = this.$slots.default[0].text.split('').map(letter => letter === " " ? "&nbsp;" : letter)
     },
   }
 </script>
