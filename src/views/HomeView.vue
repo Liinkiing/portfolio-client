@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <AnimatedText tag="h1">Yo les amis c squeezie </AnimatedText>
     <ApolloQuery class="projects-container" :query="require('../graphql/queries/ProjectsContainerQuery.graphql')">
       <template slot-scope="{ result: { data }, gqlError, isLoading }">
         <h2>Projets</h2>

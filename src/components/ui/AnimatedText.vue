@@ -1,12 +1,11 @@
 <template>
   <component :is="tag" class="animated-text">
-    <slot v-if="letters.length === 0"></slot>
     <transition-group :css="false" appear
                       name="letter-appear"
                       @before-enter="beforeEnter"
                       @enter="enter"
                       @leave="leave">
-      <span v-for="(letter, index) in letters" :key="index" :data-index="index">{{ letter }}</span>
+      <span class="letter" v-for="(letter, index) in letters" :key="index" :data-index="index">{{ letter }}</span>
     </transition-group>
   </component>
 </template>
@@ -19,7 +18,12 @@
   export default {
     name: 'AnimatedText',
     props: {
-      tag: {type: String, default: 'span'}
+      tag: {type: String, default: 'span'},
+      delay: {type: Number, default: 150},
+      duration: {type: Number, default: 0.1},
+      offset: {type: Number, default: 0},
+      enteringAnimation: {type: Function, default: letterAppear},
+      leavingAnimation: {type: Function, default: letterDisappear},
     },
     methods: {
       beforeEnter(el) {
@@ -28,14 +32,12 @@
         el.style.transformOrigin = 'top center'
       },
       enter(el, done) {
-        console.log('cc')
-        const delay = ms(el.dataset.index * 150)
-        letterAppear(el, done, delay);
+        const delay = ms((el.dataset.index * this.delay) + this.offset)
+        this.enteringAnimation.call(this, el, done, delay, this.duration);
       },
       leave(el, done) {
-        console.log('cc')
-        const delay = ms(el.dataset.index * 150)
-        letterDisappear(el, done, delay);
+        const delay = ms((el.dataset.index * this.delay) + this.offset)
+        this.leavingAnimation.call(this, el, done, delay, this.duration);
       }
     },
     data() {
@@ -50,5 +52,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+  .animated-text {
+    & .letter {
+      display: inline-block;
+    }
+  }
 </style>
