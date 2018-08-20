@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <AnimatedText tag="h1">Yo les amis c squeezie </AnimatedText>
     <ApolloQuery class="projects-container" :query="require('../graphql/queries/ProjectsContainerQuery.graphql')">
       <template slot-scope="{ result: { data }, gqlError, isLoading }">
         <h2>Projets</h2>
@@ -13,9 +14,10 @@
 
 <script>
   import ProjectsContainer from "../components/projects/ProjectsContainer";
+  import AnimatedText from "../components/ui/AnimatedText";
   export default {
     name: 'Home',
-    components: {ProjectsContainer},
+    components: {AnimatedText, ProjectsContainer},
   }
 </script>
 
