@@ -19,8 +19,8 @@
     name: 'AnimatedText',
     props: {
       tag: {type: String, default: 'span'},
-      delay: {type: Number, default: 150},
-      duration: {type: Number, default: 0.1},
+      delay: {type: Number, default: 50},
+      duration: {type: Number, default: 100},
       offset: {type: Number, default: 0},
       enteringAnimation: {type: Function, default: letterAppear},
       leavingAnimation: {type: Function, default: letterDisappear},
@@ -33,11 +33,11 @@
       },
       enter(el, done) {
         const delay = ms((el.dataset.index * this.delay) + this.offset)
-        this.enteringAnimation.call(this, el, done, delay, this.duration);
+        this.enteringAnimation.call(this, el, done, delay, ms(this.duration));
       },
       leave(el, done) {
         const delay = ms((el.dataset.index * this.delay) + this.offset)
-        this.leavingAnimation.call(this, el, done, delay, this.duration);
+        this.leavingAnimation.call(this, el, done, delay, ms(this.duration));
       }
     },
     data() {

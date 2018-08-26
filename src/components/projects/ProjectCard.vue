@@ -4,19 +4,19 @@
     <h3>{{ project.title }}</h3>
     <div class="content">
       <span class="icon-list platforms">
-        <ProjectCardPlatform class="icon-list-item" v-for="platform in project.platforms" :platform="platform" :key="platform.id"/>
+        <ProjectCardPlatform class="icon-list-item" v-for="platform in project.platforms" :platform="platform"
+                             :key="platform.id"/>
       </span>
       <span class="icon-list reverse languages">
-        <ProjectCardLanguage class="icon-list-item" v-for="language in project.languages" :language="language" :key="language.id"/>
+        <ProjectCardLanguage class="icon-list-item" v-for="language in project.languages" :language="language"
+                             :key="language.id"/>
       </span>
     </div>
   </router-link>
 </template>
 
 <script>
-  import * as Vibrant from 'node-vibrant'
-  import {extractColor} from "../../utils/colors";
-  import {CORS_ANYWHERE} from "../../utils/variables";
+  import {getVibrantColor} from "../../utils/colors";
   import ProjectCardLanguage from "./ProjectCardLanguage";
   import ProjectCardPlatform from "./ProjectCardPlatform";
 
@@ -28,17 +28,16 @@
     },
     data() {
       return {
-        proeminentColor: null
+        vibrantColor: null
       }
     },
     async created() {
-      const palette = await Vibrant.from(`${CORS_ANYWHERE}${this.project.thumbnailUrl}`).getPalette()
-      this.proeminentColor = extractColor(palette)
+      this.vibrantColor = await getVibrantColor(this.project.thumbnailUrl)
     },
     computed: {
       style() {
         return {
-          color: this.proeminentColor
+          color: this.vibrantColor
         }
       }
     }
